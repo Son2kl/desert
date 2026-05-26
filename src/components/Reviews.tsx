@@ -112,7 +112,7 @@ export default function Reviews() {
             >
               {/* Quote mark */}
               <div className="text-4xl text-mama-pink/30 font-display leading-none mb-3 select-none">
-                "
+                &ldquo;
               </div>
 
               <p className="text-mama-navy/75 text-sm leading-relaxed mb-5 flex-1">

@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 const NAV_LINKS = [
   { href: '#about', label: 'О нас' },
   { href: '#bakery', label: 'Выпечка' },
