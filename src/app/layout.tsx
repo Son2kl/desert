@@ -20,8 +20,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mama-konditorskaya
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Мама Кондитерская — выпечка, десерты и кофе',
-    template: '%s | Мама Кондитерская',
+    default: 'Мама десертов — выпечка, десерты и кофе',
+    template: '%s | Мама десертов',
   },
   description:
     'Премиальная кондитерская с авторскими десертами, свежей выпечкой и отборным кофе. Торты на заказ, корпоративные подарки. ул. Российская 255/9.',
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
     'десерты',
     'круассаны',
     'хлеб на закваске',
-    'мама кондитерская',
+    'мама десертов',
   ],
-  authors: [{ name: 'Мама Кондитерская' }],
+  authors: [{ name: 'Мама десертов' }],
   openGraph: {
-    title: 'Мама Кондитерская',
+    title: 'Мама десертов',
     description: 'Авторские десерты, свежая выпечка и отборный кофе',
     url: BASE_URL,
-    siteName: 'Мама Кондитерская',
+    siteName: 'Мама десертов',
     locale: 'ru_RU',
     type: 'website',
     images: [
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Мама Кондитерская',
+        alt: 'Мама десертов',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Мама Кондитерская',
+    title: 'Мама десертов',
     description: 'Авторские десерты, свежая выпечка и кофе',
   },
   robots: {

@@ -45,17 +45,15 @@ export default function Header() {
               className="flex items-center gap-2.5 group"
               onClick={handleNavClick}
             >
-              <span
-                className={`font-display text-2xl md:text-3xl tracking-tight transition-colors duration-300 ${
-                  scrolled ? 'text-mama-navy' : 'text-white'
-                }`}
-              >
-                MAMA
-              </span>
-              <div className={`hidden sm:flex flex-col leading-none transition-colors duration-300 ${
-                scrolled ? 'text-mama-navy' : 'text-white/90'
+              <div className={`flex flex-col leading-none transition-colors duration-300 ${
+                scrolled ? 'text-mama-navy' : 'text-white'
               }`}>
-                <span className="text-[10px] font-semibold tracking-[0.18em] uppercase">
+                <span className="font-extrabold text-xl md:text-2xl tracking-tight leading-tight">
+                  Мама десертов
+                </span>
+                <span className={`text-[10px] font-medium tracking-[0.15em] ${
+                  scrolled ? 'text-mama-navy/50' : 'text-white/60'
+                }`}>
                   кондитерская
                 </span>
               </div>

@@ -33,17 +33,17 @@ export default function Hero() {
           style={{ animationFillMode: 'forwards', animationDelay: '200ms' }}>
           <span className="w-8 h-px bg-mama-pink" />
           <span className="text-mama-pink text-xs font-semibold tracking-[0.25em] uppercase">
-            кондитерская
+            кондитерская · выпечка · кофе
           </span>
           <span className="w-8 h-px bg-mama-pink" />
         </div>
 
         {/* Brand name */}
         <h1
-          className="font-display text-[5rem] sm:text-[7rem] md:text-[9rem] leading-none text-white mb-2 opacity-0 animate-fade-up"
+          className="font-extrabold text-[3.5rem] sm:text-[5rem] md:text-[7rem] leading-[0.9] text-white mb-2 opacity-0 animate-fade-up"
           style={{ animationFillMode: 'forwards', animationDelay: '400ms' }}
         >
-          MAMA
+          Мама<br/>десертов
         </h1>
 
         {/* Tagline */}

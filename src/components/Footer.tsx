@@ -48,11 +48,9 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2.5 mb-5">
-              <span className="font-display text-3xl tracking-tight">MAMA</span>
-              <span className="text-white/40 text-xs font-semibold tracking-[0.18em] uppercase">
-                кондитерская
-              </span>
+            <div className="flex flex-col leading-none mb-5">
+              <span className="font-extrabold text-2xl tracking-tight">Мама десертов</span>
+              <span className="text-white/40 text-xs font-medium tracking-[0.15em] mt-0.5">кондитерская</span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">
               Выпечка с любовью, кофе с характером. Открыты каждый день для тех, кто ценит вкус и уют.
