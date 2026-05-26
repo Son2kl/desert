@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useInView } from '@/hooks/useInView'
+import { sendTelegramMessage } from '@/lib/telegram-client'
 
 const SIZES = [
   { id: '1kg', label: '1 кг', desc: '6–8 порций', price: 2500 },
@@ -108,23 +109,26 @@ export default function CakeConfigurator() {
   const handleSubmit = async () => {
     setStatus('loading')
     try {
-      const res = await fetch('/api/cake-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: config.name,
-          phone: config.phone,
-          date: config.date,
-          wishes: config.wishes,
-          size: `${config.size?.label} (${config.size?.price?.toLocaleString('ru-RU')}₽)`,
-          base: config.base?.label,
-          cream: config.cream?.label,
-          filling: config.filling?.label,
-          decor: `${config.decor?.label}${config.decor?.price ? ` (+${config.decor.price}₽)` : ''}`,
-          total,
-        }),
-      })
-      setStatus(res.ok ? 'success' : 'error')
+      const text = [
+        '🎂 <b>Новый заказ торта!</b>',
+        '',
+        `👤 <b>Имя:</b> ${config.name}`,
+        `📞 <b>Телефон:</b> ${config.phone}`,
+        `📅 <b>Дата получения:</b> ${config.date}`,
+        '',
+        '🎂 <b>Параметры торта:</b>',
+        `  • Размер: ${config.size?.label} (${config.size?.price?.toLocaleString('ru-RU')}₽)`,
+        `  • Бисквит: ${config.base?.label}`,
+        `  • Крем: ${config.cream?.label}`,
+        `  • Начинка: ${config.filling?.label}`,
+        `  • Декор: ${config.decor?.label}${config.decor?.price ? ` (+${config.decor.price}₽)` : ''}`,
+        '',
+        `💰 <b>Итого:</b> от ${total.toLocaleString('ru-RU')}₽`,
+        config.wishes ? `\n💬 <b>Пожелания:</b> ${config.wishes}` : '',
+      ].filter(Boolean).join('\n')
+
+      await sendTelegramMessage(text)
+      setStatus('success')
     } catch {
       setStatus('error')
     }

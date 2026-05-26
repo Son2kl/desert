@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { sendTelegramMessage } from '@/lib/telegram-client'
 
 const PREORDER_ITEMS = [
   { id: 'croissant-plain', name: 'Круассан классический', price: 180, cat: 'Выпечка' },
@@ -81,23 +82,34 @@ export default function Preorder() {
     if (!name || !phone || !date || !time) return
     setStatus('loading')
     try {
-      const res = await fetch('/api/preorder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, date, time, comment, items: cart }),
-      })
-      if (res.ok) {
-        setStatus('success')
-        setCart([])
-        setStep('items')
-        setTimeout(() => {
-          setOpen(false)
-          setStatus('idle')
-          setName(''); setPhone(''); setDate(''); setTime(''); setComment('')
-        }, 3000)
-      } else {
-        setStatus('error')
-      }
+      const itemLines = cart
+        .map((i) => `  • ${i.name} × ${i.qty} = ${(i.price * i.qty).toLocaleString('ru-RU')}₽`)
+        .join('\n')
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0)
+      const text = [
+        '🧁 <b>Новый предзаказ!</b>',
+        '',
+        `📅 <b>Дата:</b> ${date}`,
+        `🕐 <b>Время:</b> ${time}`,
+        `👤 <b>Имя:</b> ${name}`,
+        `📞 <b>Телефон:</b> ${phone}`,
+        '',
+        '📦 <b>Состав заказа:</b>',
+        itemLines,
+        '',
+        `💰 <b>Итого:</b> ${total.toLocaleString('ru-RU')}₽`,
+        comment ? `\n💬 <b>Комментарий:</b> ${comment}` : '',
+      ].filter(Boolean).join('\n')
+
+      await sendTelegramMessage(text)
+      setStatus('success')
+      setCart([])
+      setStep('items')
+      setTimeout(() => {
+        setOpen(false)
+        setStatus('idle')
+        setName(''); setPhone(''); setDate(''); setTime(''); setComment('')
+      }, 3000)
     } catch {
       setStatus('error')
     }

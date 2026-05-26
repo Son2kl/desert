@@ -1,15 +1,12 @@
 services:
   - type: web
     name: mama-konditorskaya
-    env: node
-    region: frankfurt
-    plan: free
-    buildCommand: npm ci && npm run build
-    startCommand: npm run start
-    healthCheckPath: /
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./out
     envVars:
-      - key: NODE_ENV
-        value: production
-      - key: NEXT_PUBLIC_BASE_URL
-        value: https://mama-konditorskaya.onrender.com
+      - key: NEXT_PUBLIC_TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: NEXT_PUBLIC_TELEGRAM_CHAT_ID
+        sync: false
     autoDeploy: true
