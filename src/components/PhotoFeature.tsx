@@ -25,10 +25,13 @@ export default function PhotoFeature({
         src={image}
         alt={title}
         fill
-        className="object-cover"
+        className="object-cover md:scale-100 scale-105 md:blur-none blur-[1px]"
         sizes="100vw"
       />
+      {/* Base gradient overlay */}
       <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
+      {/* Extra darkening on mobile so text is always readable */}
+      <div className="absolute inset-0 bg-black/30 md:hidden" />
       <div className={`absolute inset-0 flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-10 md:pb-20 ${align === 'center' ? 'items-center text-center' : 'items-start'}`}>
         <p className="text-mama-pink text-[11px] font-semibold uppercase tracking-[0.25em] mb-3">
           {eyebrow}

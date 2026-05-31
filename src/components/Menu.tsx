@@ -176,24 +176,36 @@ function ShowcaseCard({ item, placeholderClass }: { item: ShowcaseItem; placehol
 
 // ── Showcase carousel ─────────────────────────────────────────────────────────
 
+import { useEffect } from 'react'
+
+function usePerPage() {
+  const [perPage, setPerPage] = useState(3)
+  useEffect(() => {
+    const update = () => setPerPage(window.innerWidth < 768 ? 2 : 3)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+  return perPage
+}
+
 function ShowcaseCarousel({ items, placeholderClass, resetKey }: {
   items: ShowcaseItem[]
   placeholderClass: string
   resetKey?: string
 }) {
   const [page, setPage] = useState(0)
-  const perPage = 3
+  const perPage = usePerPage()
   const totalPages = Math.ceil(items.length / perPage)
   const visible = items.slice(page * perPage, (page + 1) * perPage)
 
-  // reset when parent changes (tab switch or group switch)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { setPage(0) }, [resetKey, perPage])
+
   const stableKey = resetKey
-  useState(() => { setPage(0) })
 
   return (
     <div key={stableKey}>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      <div className={`grid gap-4 md:gap-6 ${perPage === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
         {visible.map((item) => (
           <ShowcaseCard key={item.id} item={item} placeholderClass={placeholderClass} />
         ))}

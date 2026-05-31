@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
 
@@ -18,6 +18,12 @@ const montserrat = Montserrat({
 })
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mama-konditorskaya.ru'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

@@ -81,6 +81,21 @@
   }
 }
 
+/* iOS safe area */
+@supports (padding: env(safe-area-inset-top)) {
+  header {
+    padding-top: env(safe-area-inset-top);
+  }
+  .main-safe {
+    padding-top: calc(4rem + env(safe-area-inset-top));
+  }
+  @media (min-width: 768px) {
+    .main-safe {
+      padding-top: calc(5rem + env(safe-area-inset-top));
+    }
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #faf8f7; }
