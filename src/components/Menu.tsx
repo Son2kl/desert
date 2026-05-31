@@ -174,14 +174,68 @@ function ShowcaseCard({ item, placeholderClass }: { item: ShowcaseItem; placehol
   )
 }
 
-// ── Category intro ────────────────────────────────────────────────────────────
+// ── Showcase carousel ─────────────────────────────────────────────────────────
 
-function CategoryIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
+function ShowcaseCarousel({ items, placeholderClass, resetKey }: {
+  items: ShowcaseItem[]
+  placeholderClass: string
+  resetKey?: string
+}) {
+  const [page, setPage] = useState(0)
+  const perPage = 3
+  const totalPages = Math.ceil(items.length / perPage)
+  const visible = items.slice(page * perPage, (page + 1) * perPage)
+
+  // reset when parent changes (tab switch or group switch)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const stableKey = resetKey
+  useState(() => { setPage(0) })
+
   return (
-    <div className="mb-10">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mama-pink mb-2">{eyebrow}</p>
-      <h3 className="font-display font-bold text-3xl md:text-4xl text-mama-navy mb-3">{title}</h3>
-      <p className="text-mama-navy/55 text-base font-light max-w-xl">{text}</p>
+    <div key={stableKey}>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {visible.map((item) => (
+          <ShowcaseCard key={item.id} item={item} placeholderClass={placeholderClass} />
+        ))}
+      </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={page === 0}
+            className="w-10 h-10 rounded-full border border-mama-blush flex items-center justify-center text-mama-navy disabled:opacity-25 hover:border-mama-pink hover:text-mama-pink transition-colors duration-200"
+            aria-label="Назад"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <div className="flex gap-1.5">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setPage(i)}
+                className={`rounded-full transition-all duration-200 ${
+                  i === page ? 'w-5 h-2 bg-mama-navy' : 'w-2 h-2 bg-mama-blush hover:bg-mama-navy/30'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+            disabled={page === totalPages - 1}
+            className="w-10 h-10 rounded-full border border-mama-blush flex items-center justify-center text-mama-navy disabled:opacity-25 hover:border-mama-pink hover:text-mama-pink transition-colors duration-200"
+            aria-label="Вперёд"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   )
 }
@@ -199,17 +253,12 @@ export default function Menu() {
         {/* Section heading */}
         <div
           ref={ref}
-          className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14 transition-all duration-700 ${
+          className={`mb-8 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div>
-            <span className="section-tag">Витрина</span>
-            <h2 className="section-title">Меню</h2>
-          </div>
-          <p className="text-mama-navy/50 text-base font-light max-w-sm leading-relaxed md:text-right">
-            Всё готовится вручную каждый день — кофе, выпечка, авторские десерты
-          </p>
+          <span className="section-tag">Витрина</span>
+          <h2 className="section-title">Меню</h2>
         </div>
 
         {/* Tabs */}
@@ -232,11 +281,6 @@ export default function Menu() {
         {/* ── DRINKS TAB ── */}
         {activeTab === 'drinks' && (
           <div>
-            <CategoryIntro
-              eyebrow="Авторские и классика"
-              title="Кофе и напитки"
-              text="Из отборных зёрен, с любовью к каждой чашке. Классика и авторские рецепты наших барист."
-            />
 
             {/* Featured signature drinks */}
             <div className="grid sm:grid-cols-3 gap-6 mb-14">
@@ -266,53 +310,34 @@ export default function Menu() {
 
         {/* ── BAKERY TAB ── */}
         {activeTab === 'bakery' && (
-          <div>
-            <CategoryIntro
-              eyebrow="Из печи — на стол"
-              title="Свежая выпечка"
-              text="Каждое утро с нуля — без полуфабрикатов, только натуральные ингредиенты и ручная работа."
-            />
-            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {BAKERY_ITEMS.map((item) => (
-                <ShowcaseCard
-                  key={item.id}
-                  item={item}
-                  placeholderClass="bg-gradient-to-br from-[#f5e6c8] via-[#fdf0dd] to-mama-blush"
-                />
-              ))}
-            </div>
-          </div>
+          <ShowcaseCarousel
+            items={BAKERY_ITEMS}
+            placeholderClass="bg-gradient-to-br from-[#f5e6c8] via-[#fdf0dd] to-mama-blush"
+            resetKey="bakery"
+          />
         )}
 
         {/* ── DESSERTS TAB ── */}
         {activeTab === 'desserts' && (
           <div>
-            <CategoryIntro
-              eyebrow="Ручная работа"
-              title="Авторские десерты"
-              text="Всё на витрине. Большинство позиций — также на заказ, штучно или набором."
+            {/* Авторские */}
+            <ShowcaseCarousel
+              items={DESSERT_ITEMS.filter((i) => (i as ShowcaseItemExt).authorski)}
+              placeholderClass="bg-gradient-to-br from-mama-blush-deep via-mama-blush to-[#fce8f0]"
+              resetKey="desserts-auth"
             />
 
-            {/* Авторские */}
-            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-12">
-              {DESSERT_ITEMS.filter((i) => (i as ShowcaseItemExt).authorski).map((item) => (
-                <ShowcaseCard key={item.id} item={item}
-                  placeholderClass="bg-gradient-to-br from-mama-blush-deep via-mama-blush to-[#fce8f0]" />
-              ))}
-            </div>
-
             {/* Остальное */}
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 my-8">
               <span className="h-px flex-1 bg-mama-blush" />
               <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mama-navy/40">Также на витрине</span>
               <span className="h-px flex-1 bg-mama-blush" />
             </div>
-            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
-              {DESSERT_ITEMS.filter((i) => !(i as ShowcaseItemExt).authorski).map((item) => (
-                <ShowcaseCard key={item.id} item={item}
-                  placeholderClass="bg-gradient-to-br from-mama-blush-deep via-mama-blush to-[#fce8f0]" />
-              ))}
-            </div>
+            <ShowcaseCarousel
+              items={DESSERT_ITEMS.filter((i) => !(i as ShowcaseItemExt).authorski)}
+              placeholderClass="bg-gradient-to-br from-mama-blush-deep via-mama-blush to-[#fce8f0]"
+              resetKey="desserts-rest"
+            />
 
             <div className="mt-10 text-center">
               <p className="text-mama-navy/50 text-sm font-light mb-4">

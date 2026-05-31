@@ -11,14 +11,7 @@ const NAV_LINKS = [
 ]
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -29,13 +22,7 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-mama-blush'
-            : 'bg-transparent'
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-mama-blush shadow-sm">
         <div className="max-w-7xl mx-auto px-5 md:px-10">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
@@ -44,15 +31,11 @@ export default function Header() {
               className="flex items-center gap-2.5 group"
               onClick={handleNavClick}
             >
-              <div className={`flex flex-col leading-none transition-colors duration-300 ${
-                scrolled ? 'text-mama-navy' : 'text-white'
-              }`}>
+              <div className="flex flex-col leading-none text-mama-navy">
                 <span className="font-extrabold text-xl md:text-2xl tracking-tight leading-tight">
                   Мама десертов
                 </span>
-                <span className={`text-[10px] font-medium tracking-[0.15em] ${
-                  scrolled ? 'text-mama-navy/50' : 'text-white/60'
-                }`}>
+                <span className="text-[10px] font-medium tracking-[0.15em] text-mama-navy/50">
                   кондитерская
                 </span>
               </div>
@@ -64,9 +47,7 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-mama-pink ${
-                    scrolled ? 'text-mama-navy/80' : 'text-white/90'
-                  }`}
+                  className="text-sm font-medium tracking-wide transition-colors duration-300 hover:text-mama-pink text-mama-navy/80"
                 >
                   {link.label}
                 </a>
@@ -77,9 +58,7 @@ export default function Header() {
             <div className="flex items-center gap-4">
               <a
                 href="tel:+79615078100"
-                className={`hidden md:flex items-center gap-2 text-sm font-semibold transition-all duration-300 hover:text-mama-pink ${
-                  scrolled ? 'text-mama-navy' : 'text-white'
-                }`}
+                className="hidden md:flex items-center gap-2 text-sm font-semibold transition-all duration-300 hover:text-mama-pink text-mama-navy"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -89,9 +68,7 @@ export default function Header() {
 
               {/* Mobile Burger */}
               <button
-                className={`lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 transition-colors duration-300 ${
-                  scrolled ? 'text-mama-navy' : 'text-white'
-                }`}
+                className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 text-mama-navy"
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Меню"
               >

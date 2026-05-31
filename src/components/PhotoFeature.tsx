@@ -29,11 +29,11 @@ export default function PhotoFeature({
         sizes="100vw"
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
-      <div className={`absolute inset-0 flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-14 md:pb-20 ${align === 'center' ? 'items-center text-center' : 'items-start'}`}>
+      <div className={`absolute inset-0 flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-10 md:pb-20 ${align === 'center' ? 'items-center text-center' : 'items-start'}`}>
         <p className="text-mama-pink text-[11px] font-semibold uppercase tracking-[0.25em] mb-3">
           {eyebrow}
         </p>
-        <h2 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl text-white leading-[1.0] mb-4 max-w-2xl">
+        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] mb-4 max-w-2xl">
           {title}
         </h2>
         {subtitle && (

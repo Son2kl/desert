@@ -91,12 +91,12 @@ export default function About() {
                 />
               </div>
               {/* Floating accent card */}
-              <div className="absolute -bottom-6 -left-6 bg-mama-blush rounded-2xl p-5 shadow-lg">
+              <div className="absolute -bottom-6 left-4 md:-left-6 bg-mama-blush rounded-2xl p-5 shadow-lg">
                 <p className="text-3xl font-extrabold text-mama-navy">100%</p>
                 <p className="text-sm text-mama-navy/70 font-medium mt-0.5">натуральные<br/>ингредиенты</p>
               </div>
               {/* Decorative dot */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-mama-blush opacity-60" />
+              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-mama-blush opacity-60 hidden sm:block" />
             </div>
           </div>
         </div>
