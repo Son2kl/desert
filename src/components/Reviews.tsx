@@ -76,7 +76,7 @@ export default function Reviews() {
   const avg = (REVIEWS.reduce((s, r) => s + r.rating, 0) / REVIEWS.length).toFixed(1)
 
   return (
-    <section id="reviews" className="py-24 md:py-32 bg-mama-blush overflow-hidden">
+    <section id="reviews" className="py-14 md:py-20 bg-mama-blush overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
 
         {/* Heading */}
@@ -89,7 +89,7 @@ export default function Reviews() {
           <span className="section-tag">Мнения гостей</span>
           <h2 className="section-title mb-4">Отзывы</h2>
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-5xl font-extrabold text-mama-navy">{avg}</span>
+            <span className="font-display font-bold text-5xl text-mama-navy">{avg}</span>
             <div className="flex flex-col items-start gap-1">
               <StarRating rating={5} />
               <span className="text-mama-navy/50 text-sm">на основе {REVIEWS.length * 100}+ отзывов</span>

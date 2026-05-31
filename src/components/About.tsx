@@ -26,7 +26,7 @@ export default function About() {
   const { ref: statsRef, isVisible: statsVisible } = useInView()
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-white overflow-hidden">
+    <section id="about" className="py-14 md:py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
 
         {/* Top row: text + image */}
@@ -114,13 +114,13 @@ export default function About() {
               className="text-center"
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <p className="text-5xl md:text-6xl font-extrabold text-mama-navy mb-2">
+              <p className="font-display font-bold text-5xl md:text-6xl text-mama-navy mb-2 leading-none">
                 {v.number}
               </p>
-              <p className="text-mama-pink font-semibold text-sm uppercase tracking-wider mb-2">
+              <p className="text-mama-pink font-semibold text-[11px] uppercase tracking-[0.2em] mb-2">
                 {v.label}
               </p>
-              <p className="text-mama-navy/55 text-sm">{v.desc}</p>
+              <p className="text-mama-navy/50 text-sm font-light">{v.desc}</p>
             </div>
           ))}
         </div>

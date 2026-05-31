@@ -4,10 +4,9 @@ import Link from 'next/link'
 
 const NAV_LINKS = [
   { href: '#about', label: 'О нас' },
-  { href: '#bakery', label: 'Выпечка' },
-  { href: '#coffee', label: 'Кофе' },
   { href: '#menu', label: 'Меню' },
-  { href: '#gallery', label: 'Галерея' },
+  { href: '#cakes', label: 'Торты' },
+
   { href: '#contacts', label: 'Контакты' },
 ]
 
@@ -86,17 +85,6 @@ export default function Header() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 8-961-507-81-00
-              </a>
-
-              <a
-                href="#menu"
-                className={`hidden sm:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 ${
-                  scrolled
-                    ? 'bg-mama-pink text-white hover:bg-mama-pink-dark shadow-sm'
-                    : 'bg-white/20 text-white border border-white/40 hover:bg-white hover:text-mama-navy backdrop-blur-sm'
-                }`}
-              >
-                Меню
               </a>
 
               {/* Mobile Burger */}

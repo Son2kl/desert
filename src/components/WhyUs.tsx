@@ -53,7 +53,7 @@ export default function WhyUs() {
   const { ref: cardsRef, isVisible: cardsVisible } = useInView(0.05)
 
   return (
-    <section id="why" className="py-24 md:py-32 bg-white overflow-hidden">
+    <section id="why" className="py-14 md:py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
 
         {/* Heading */}
@@ -86,12 +86,12 @@ export default function WhyUs() {
               style={{ transitionDelay: `${i * 120}ms` }}
             >
               {/* Icon */}
-              <div className="w-16 h-16 rounded-2xl bg-mama-blush text-mama-pink flex items-center justify-center mb-6 group-hover:bg-mama-pink group-hover:text-white transition-colors duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-mama-blush text-mama-pink flex items-center justify-center mb-5 group-hover:bg-mama-pink group-hover:text-white transition-colors duration-300">
                 {feature.icon}
               </div>
 
-              <h3 className="text-xl font-bold text-mama-navy mb-3">{feature.title}</h3>
-              <p className="text-mama-navy/60 text-sm leading-relaxed">{feature.description}</p>
+              <h3 className="font-semibold text-lg text-mama-navy mb-3">{feature.title}</h3>
+              <p className="text-mama-navy/55 text-sm leading-relaxed font-light">{feature.description}</p>
             </div>
           ))}
         </div>

@@ -5,56 +5,51 @@ import { sendTelegramMessage } from '@/lib/telegram-client'
 
 const SIZES = [
   { id: '1kg', label: '1 кг', desc: '6–8 порций', price: 2500 },
-  { id: '1.5kg', label: '1.5 кг', desc: '10–12 порций', price: 3500 },
-  { id: '2kg', label: '2 кг', desc: '14–16 порций', price: 4500 },
-  { id: '3kg', label: '3 кг', desc: '20–24 порции', price: 6500 },
+  { id: '1.5kg', label: '1,5 кг', desc: '10–12 порций', price: 3750 },
+  { id: '2kg', label: '2 кг', desc: '14–16 порций', price: 5000 },
+  { id: '2.5kg', label: '2,5 кг', desc: '18–20 порций', price: 6250 },
+  { id: '3kg', label: '3 кг', desc: '22–24 порции', price: 7500 },
 ]
 
-const BASES = [
-  { id: 'vanilla', label: 'Ванильный бисквит', emoji: '🍰' },
-  { id: 'chocolate', label: 'Шоколадный', emoji: '🍫' },
-  { id: 'red-velvet', label: 'Красный бархат', emoji: '❤️' },
-  { id: 'carrot', label: 'Морковный', emoji: '🥕' },
-  { id: 'honey', label: 'Медовик', emoji: '🍯' },
-  { id: 'napoleon', label: 'Наполеон', emoji: '📜' },
-]
-
-const CREAMS = [
-  { id: 'vanilla-plombir', label: 'Ванильный пломбир' },
-  { id: 'chocolate-ganache', label: 'Шоколадный ганаш' },
-  { id: 'strawberry', label: 'Клубничный' },
-  { id: 'cream-cheese', label: 'Сливочный сыр' },
-  { id: 'caramel', label: 'Солёная карамель' },
-]
-
-const FILLINGS = [
-  { id: 'none', label: 'Без начинки' },
-  { id: 'berries', label: 'Лесные ягоды' },
-  { id: 'strawberry', label: 'Клубника' },
-  { id: 'chocolate', label: 'Шоколад' },
-  { id: 'caramel', label: 'Карамель' },
-  { id: 'nuts', label: 'Орехи' },
+const FLAVORS = [
+  { id: 'milky-girl-raspberry', label: 'Молочная девочка с малиной' },
+  { id: 'milky-girl-blackcurrant', label: 'Молочная девочка с чёрной смородиной' },
+  { id: 'red-velvet-cherry', label: 'Красный бархат с вишней' },
+  { id: 'chocolate-truffle', label: 'Шоколадный трюфель' },
+  { id: 'snickers', label: 'Сникерс' },
+  { id: 'chocolate-cherry', label: 'Шоколадный с вишней' },
+  { id: 'caramel-girl', label: 'Карамельная девочка' },
+  { id: 'pistachio-raspberry', label: 'Фисташковая девочка с малиной' },
+  { id: 'banana', label: 'Банановый' },
+  { id: 'medovik-caramel', label: 'Медовик с солёной карамелью' },
 ]
 
 const DECORS = [
-  { id: 'minimal', label: 'Минималистичный', desc: 'Гладкое покрытие, без излишеств', price: 0, emoji: '⬜' },
-  { id: 'flowers', label: 'Живые цветы', desc: 'Свежие цветы от флориста', price: 500, emoji: '🌸' },
-  { id: 'figurines', label: 'Фигурки', desc: 'Персонажи из мастики под заказ', price: 800, emoji: '🎨' },
-  { id: 'inscription', label: 'Надпись', desc: 'Поздравление шоколадом или кремом', price: 200, emoji: '✍️' },
+  { id: 'minimal', label: 'Минималистичный декор', desc: 'Кремовая надпись, простые контурные рисунки, украшение мелкими элементами', price: 0 },
+  { id: 'lambeth', label: 'Ламбет', desc: 'Кремовые рюши', price: 700 },
+  { id: 'lambeth-bows', label: 'Ламбет с бантиками', desc: 'Кремовые рюши + бантики из атласных лент', price: 700 },
+  { id: 'lambeth-sugar', label: 'Ламбет + сахарная картинка', desc: 'Ламбет с сахарной картинкой', price: 1000 },
+  { id: 'cream-drawing', label: 'С кремовым рисунком', desc: 'Авторский кремовый рисунок', price: 800 },
+  { id: 'chocolate-figure', label: 'С шоколадной фигуркой', desc: 'Шоколадная фигурка ручной работы', price: 1000 },
+  { id: 'sugar-print', label: 'С картинкой на сахарной бумаге', desc: 'Печать вашего фото или изображения', price: 600 },
+  { id: 'minimal-berries', label: 'Минимализм с ягодами', desc: 'Лаконичное оформление со свежими ягодами', price: 1000 },
 ]
 
-const STEPS = ['Размер', 'Бисквит', 'Крем & начинка', 'Декор', 'Контакты']
+const STEPS = ['Размер', 'Начинка', 'Декор', 'Контакты']
 
 interface Config {
   size: typeof SIZES[0] | null
-  base: typeof BASES[0] | null
-  cream: typeof CREAMS[0] | null
-  filling: typeof FILLINGS[0] | null
+  flavor: typeof FLAVORS[0] | null
   decor: typeof DECORS[0] | null
   name: string
   phone: string
   date: string
   wishes: string
+}
+
+const EMPTY_CONFIG: Config = {
+  size: null, flavor: null, decor: null,
+  name: '', phone: '', date: '', wishes: '',
 }
 
 function getMinDate() {
@@ -91,17 +86,13 @@ export default function CakeConfigurator() {
   const { ref, isVisible } = useInView()
   const [step, setStep] = useState(0)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [config, setConfig] = useState<Config>({
-    size: null, base: null, cream: null, filling: null, decor: null,
-    name: '', phone: '', date: '', wishes: '',
-  })
+  const [config, setConfig] = useState<Config>(EMPTY_CONFIG)
 
   const total = (config.size?.price ?? 0) + (config.decor?.price ?? 0)
 
   const canNext = [
     !!config.size,
-    !!config.base,
-    !!(config.cream && config.filling),
+    !!config.flavor,
     !!config.decor,
     !!(config.name && config.phone && config.date),
   ]
@@ -118,9 +109,7 @@ export default function CakeConfigurator() {
         '',
         '🎂 <b>Параметры торта:</b>',
         `  • Размер: ${config.size?.label} (${config.size?.price?.toLocaleString('ru-RU')}₽)`,
-        `  • Бисквит: ${config.base?.label}`,
-        `  • Крем: ${config.cream?.label}`,
-        `  • Начинка: ${config.filling?.label}`,
+        `  • Начинка: ${config.flavor?.label}`,
         `  • Декор: ${config.decor?.label}${config.decor?.price ? ` (+${config.decor.price}₽)` : ''}`,
         '',
         `💰 <b>Итого:</b> от ${total.toLocaleString('ru-RU')}₽`,
@@ -135,20 +124,19 @@ export default function CakeConfigurator() {
   }
 
   return (
-    <section id="cake" className="py-24 md:py-32 bg-mama-cream overflow-hidden">
+    <section id="cake" className="py-14 md:py-20 bg-mama-cream overflow-hidden">
       <div className="max-w-3xl mx-auto px-5 md:px-10">
 
-        {/* Heading */}
         <div
           ref={ref}
           className={`text-center mb-12 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="section-tag">Индивидуальный заказ</span>
+          <span className="section-tag">Экспресс-заказ</span>
           <h2 className="section-title mb-4">Конструктор торта</h2>
           <p className="section-subtitle mx-auto text-center">
-            Соберите торт мечты за 5 шагов — укажем точную цену и свяжемся с вами
+            Соберите торт за 4 шага — укажем точную цену и свяжемся с вами
           </p>
         </div>
 
@@ -160,7 +148,7 @@ export default function CakeConfigurator() {
               Свяжемся с вами в течение 2 часов для подтверждения и уточнения деталей
             </p>
             <button
-              onClick={() => { setStatus('idle'); setStep(0); setConfig({ size: null, base: null, cream: null, filling: null, decor: null, name: '', phone: '', date: '', wishes: '' }) }}
+              onClick={() => { setStatus('idle'); setStep(0); setConfig(EMPTY_CONFIG) }}
               className="btn-outline-navy"
             >
               Сделать ещё один заказ
@@ -202,7 +190,6 @@ export default function CakeConfigurator() {
                   </button>
                 ))}
               </div>
-              {/* Progress line */}
               <div className="h-1 bg-mama-blush rounded-full">
                 <div
                   className="h-full bg-mama-pink rounded-full transition-all duration-500"
@@ -218,7 +205,7 @@ export default function CakeConfigurator() {
               {step === 0 && (
                 <div>
                   <h3 className="font-bold text-mama-navy text-lg mb-5">Выберите размер</h3>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {SIZES.map((s) => (
                       <SelectCard key={s.id} selected={config.size?.id === s.id} onClick={() => setConfig((c) => ({ ...c, size: s }))}>
                         <p className="text-xl font-extrabold text-mama-navy">{s.label}</p>
@@ -230,49 +217,22 @@ export default function CakeConfigurator() {
                 </div>
               )}
 
-              {/* Step 1: Base */}
+              {/* Step 1: Flavor */}
               {step === 1 && (
                 <div>
-                  <h3 className="font-bold text-mama-navy text-lg mb-5">Выберите бисквит</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {BASES.map((b) => (
-                      <SelectCard key={b.id} selected={config.base?.id === b.id} onClick={() => setConfig((c) => ({ ...c, base: b }))}>
-                        <span className="text-2xl block mb-2">{b.emoji}</span>
-                        <p className="text-mama-navy font-semibold text-sm">{b.label}</p>
+                  <h3 className="font-bold text-mama-navy text-lg mb-5">Выберите начинку</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {FLAVORS.map((f) => (
+                      <SelectCard key={f.id} selected={config.flavor?.id === f.id} onClick={() => setConfig((c) => ({ ...c, flavor: f }))}>
+                        <p className="text-mama-navy font-semibold text-sm">{f.label}</p>
                       </SelectCard>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Step 2: Cream & Filling */}
+              {/* Step 2: Decor */}
               {step === 2 && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-bold text-mama-navy text-lg mb-3">Крем</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {CREAMS.map((c) => (
-                        <SelectCard key={c.id} selected={config.cream?.id === c.id} onClick={() => setConfig((cfg) => ({ ...cfg, cream: c }))}>
-                          <p className="text-mama-navy font-medium text-sm">{c.label}</p>
-                        </SelectCard>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-mama-navy text-lg mb-3">Начинка</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {FILLINGS.map((f) => (
-                        <SelectCard key={f.id} selected={config.filling?.id === f.id} onClick={() => setConfig((cfg) => ({ ...cfg, filling: f }))}>
-                          <p className="text-mama-navy font-medium text-sm">{f.label}</p>
-                        </SelectCard>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3: Decor */}
-              {step === 3 && (
                 <div>
                   <h3 className="font-bold text-mama-navy text-lg mb-5">Оформление</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -280,7 +240,6 @@ export default function CakeConfigurator() {
                       <SelectCard key={d.id} selected={config.decor?.id === d.id} onClick={() => setConfig((c) => ({ ...c, decor: d }))}>
                         <div className="flex items-start justify-between gap-2">
                           <div>
-                            <span className="text-xl block mb-1">{d.emoji}</span>
                             <p className="text-mama-navy font-semibold text-sm">{d.label}</p>
                             <p className="text-mama-navy/50 text-xs mt-0.5">{d.desc}</p>
                           </div>
@@ -294,23 +253,20 @@ export default function CakeConfigurator() {
                 </div>
               )}
 
-              {/* Step 4: Contacts */}
-              {step === 4 && (
+              {/* Step 3: Contacts */}
+              {step === 3 && (
                 <div className="space-y-4">
                   <h3 className="font-bold text-mama-navy text-lg mb-2">Ваши данные</h3>
 
-                  {/* Summary */}
                   <div className="bg-mama-blush rounded-2xl p-4 text-sm space-y-1">
                     {[
                       { k: 'Размер', v: config.size?.label },
-                      { k: 'Бисквит', v: config.base?.label },
-                      { k: 'Крем', v: config.cream?.label },
-                      { k: 'Начинка', v: config.filling?.label },
+                      { k: 'Начинка', v: config.flavor?.label },
                       { k: 'Декор', v: config.decor?.label },
                     ].map(({ k, v }) => (
-                      <div key={k} className="flex justify-between">
-                        <span className="text-mama-navy/50">{k}</span>
-                        <span className="font-medium text-mama-navy">{v}</span>
+                      <div key={k} className="flex justify-between gap-2">
+                        <span className="text-mama-navy/50 shrink-0">{k}</span>
+                        <span className="font-medium text-mama-navy text-right">{v}</span>
                       </div>
                     ))}
                   </div>
@@ -400,7 +356,7 @@ export default function CakeConfigurator() {
                 ) : (
                   <button
                     onClick={handleSubmit}
-                    disabled={!canNext[4] || status === 'loading'}
+                    disabled={!canNext[3] || status === 'loading'}
                     className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                   >
                     {status === 'loading' ? 'Отправляем...' : 'Отправить заказ'}

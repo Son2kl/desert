@@ -17,7 +17,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-dela-gothic)', 'Impact', 'sans-serif'],
+        display: ['var(--font-playfair)', 'Georgia', 'serif'],
         sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
       },
       animation: {

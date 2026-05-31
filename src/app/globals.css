@@ -9,6 +9,7 @@
 
   body {
     @apply bg-mama-cream text-mama-navy font-sans antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
 
   ::selection {
@@ -17,32 +18,44 @@
 }
 
 @layer components {
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-mama-pink text-white font-sans font-semibold text-sm tracking-wide rounded-full transition-all duration-300 hover:bg-mama-pink-dark hover:shadow-lg hover:shadow-mama-pink/30 hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-mama-pink text-white font-sans font-semibold text-sm tracking-wide rounded-full transition-all duration-300 hover:bg-mama-pink-dark hover:shadow-xl hover:shadow-mama-pink/25 hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-white text-white font-sans font-semibold text-sm tracking-wide rounded-full transition-all duration-300 hover:bg-white hover:text-mama-navy hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-white text-white font-sans font-semibold text-sm tracking-wide rounded-full transition-all duration-300 hover:bg-white hover:text-mama-navy hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-outline-navy {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-mama-navy text-mama-navy font-sans font-semibold text-sm tracking-wide rounded-full transition-all duration-300 hover:bg-mama-navy hover:text-white hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-mama-navy/30 text-mama-navy font-sans font-semibold text-sm tracking-wide rounded-full transition-all duration-300 hover:border-mama-navy hover:bg-mama-navy hover:text-white hover:-translate-y-0.5 active:translate-y-0;
   }
 
+  /* ── Section typography ── */
   .section-tag {
-    @apply inline-block text-xs font-semibold tracking-[0.2em] uppercase text-mama-pink mb-4;
+    @apply inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-mama-pink mb-5;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-extrabold text-mama-navy leading-tight;
+    @apply font-display font-bold text-4xl md:text-5xl text-mama-navy leading-[1.1];
   }
 
   .section-subtitle {
-    @apply text-lg text-mama-navy/60 leading-relaxed max-w-2xl;
+    @apply text-base md:text-lg text-mama-navy/55 leading-relaxed max-w-2xl font-light;
   }
 
-  .card-hover {
-    @apply transition-all duration-400 hover:-translate-y-1 hover:shadow-xl;
+  /* ── Cards ── */
+  .card-base {
+    @apply bg-white rounded-3xl overflow-hidden shadow-sm border border-mama-blush/60 transition-all duration-400 hover:-translate-y-1 hover:shadow-xl hover:shadow-mama-navy/8 hover:border-mama-blush;
+  }
+
+  /* ── Tabs ── */
+  .tab-btn {
+    @apply px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border border-mama-blush bg-white text-mama-navy/60 hover:border-mama-pink/40 hover:text-mama-navy;
+  }
+
+  .tab-btn-active {
+    @apply bg-mama-navy text-white border-transparent shadow-md shadow-mama-navy/20;
   }
 }
 
@@ -59,10 +72,17 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .hover\:shadow-mama-navy\/8:hover {
+    --tw-shadow-color: rgb(66 77 97 / 0.08);
+  }
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #faf8f7; }
-::-webkit-scrollbar-thumb { background: #f19496; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #f19496; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #e07a7d; }

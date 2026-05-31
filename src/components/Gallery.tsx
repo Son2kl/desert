@@ -46,7 +46,7 @@ export default function Gallery() {
   const { ref: gridRef, isVisible: gridVisible } = useInView(0.05)
 
   return (
-    <section id="gallery" className="py-24 md:py-32 bg-mama-navy overflow-hidden">
+    <section id="gallery" className="py-14 md:py-20 bg-mama-navy overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
 
         {/* Heading */}

@@ -1,13 +1,9 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
-import DailyMenu from '@/components/DailyMenu'
 import About from '@/components/About'
-import Bakery from '@/components/Bakery'
-import Coffee from '@/components/Coffee'
+import PhotoFeature from '@/components/PhotoFeature'
 import Menu from '@/components/Menu'
-import CakeConfigurator from '@/components/CakeConfigurator'
-import Gallery from '@/components/Gallery'
-import WhyUs from '@/components/WhyUs'
+import Cakes from '@/components/Cakes'
 import Reviews from '@/components/Reviews'
 import Contacts from '@/components/Contacts'
 import Footer from '@/components/Footer'
@@ -19,14 +15,30 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <DailyMenu />
         <About />
-        <Bakery />
-        <Coffee />
+
+        <PhotoFeature
+          image="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1920&q=90&fit=crop"
+          eyebrow="Витрина"
+          title="Авторские десерты и выпечка"
+          subtitle="Каждый день — свежая выпечка, авторские десерты и торты по кусочкам"
+          align="left"
+        />
+
         <Menu />
-        <CakeConfigurator />
-        <Gallery />
-        <WhyUs />
+
+        <PhotoFeature
+          image="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=1920&q=90&fit=crop"
+          eyebrow="На заказ"
+          title="Торт мечты для вашего праздника"
+          subtitle="Авторский декор, 10 начинок на выбор, срок от 3 дней"
+          ctaLabel="Собрать торт"
+          ctaHref="#cakes"
+          align="left"
+          overlay="dark"
+        />
+
+        <Cakes />
         <Reviews />
         <Contacts />
       </main>

@@ -1,16 +1,18 @@
 import type { Metadata } from 'next'
-import { Dela_Gothic_One, Montserrat } from 'next/font/google'
+import { Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
 
-const delaGothic = Dela_Gothic_One({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-dela-gothic',
+const playfair = Playfair_Display({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '700', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
   display: 'swap',
 })
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-montserrat',
   display: 'swap',
 })
@@ -74,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru" className={`${delaGothic.variable} ${montserrat.variable}`}>
+    <html lang="ru" className={`${playfair.variable} ${montserrat.variable}`}>
       <body>{children}</body>
     </html>
   )
