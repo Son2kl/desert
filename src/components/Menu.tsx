@@ -332,25 +332,11 @@ export default function Menu() {
         {/* ── DESSERTS TAB ── */}
         {activeTab === 'desserts' && (
           <div>
-            {/* Авторские */}
             <ShowcaseCarousel
-              items={DESSERT_ITEMS.filter((i) => (i as ShowcaseItemExt).authorski)}
+              items={DESSERT_ITEMS}
               placeholderClass="bg-gradient-to-br from-mama-blush-deep via-mama-blush to-[#fce8f0]"
-              resetKey="desserts-auth"
+              resetKey="desserts"
             />
-
-            {/* Остальное */}
-            <div className="flex items-center gap-4 my-8">
-              <span className="h-px flex-1 bg-mama-blush" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mama-navy/40">Также на витрине</span>
-              <span className="h-px flex-1 bg-mama-blush" />
-            </div>
-            <ShowcaseCarousel
-              items={DESSERT_ITEMS.filter((i) => !(i as ShowcaseItemExt).authorski)}
-              placeholderClass="bg-gradient-to-br from-mama-blush-deep via-mama-blush to-[#fce8f0]"
-              resetKey="desserts-rest"
-            />
-
             <div className="mt-10 text-center">
               <p className="text-mama-navy/50 text-sm font-light mb-4">
                 Хотите заказать к мероприятию или в подарок?

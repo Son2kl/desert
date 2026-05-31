@@ -14,6 +14,8 @@ export default function Hero() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+        {/* Extra overlay on mobile so title stays readable */}
+        <div className="absolute inset-0 bg-black/30 md:hidden" />
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
