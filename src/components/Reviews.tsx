@@ -72,7 +72,7 @@ export default function Reviews() {
           <span className="section-tag">Мнения гостей</span>
           <h2 className="section-title mb-4">Отзывы</h2>
           <div className="flex items-center justify-center gap-3">
-            <span className="font-display font-bold text-5xl text-mama-navy">{avg}</span>
+            <span className="font-display text-5xl text-mama-navy">{avg}</span>
             <div className="flex flex-col items-start gap-1">
               <StarRating rating={5} />
               <span className="text-mama-navy/50 text-sm">на основе {REVIEWS.length * 100}+ отзывов</span>

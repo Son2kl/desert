@@ -129,7 +129,7 @@ function SelectCard({
 function PhotoPlaceholder({ initial }: { initial: string }) {
   return (
     <div className="w-full aspect-square rounded-2xl bg-gradient-to-br from-mama-blush via-[#fcecea] to-mama-cream flex items-center justify-center">
-      <span className="font-display font-bold text-5xl text-mama-pink/15 select-none">{initial}</span>
+      <span className="font-display text-5xl text-mama-pink/15 select-none">{initial}</span>
     </div>
   )
 }

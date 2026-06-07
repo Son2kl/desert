@@ -24,7 +24,7 @@ export default function Hero() {
           Мама десертов
         </p>
 
-        <h1 className="font-display font-bold text-[2.3rem] sm:text-[3.4rem] md:text-[4.6rem] leading-[1.1] text-white mb-6">
+        <h1 className="font-display text-[2.3rem] sm:text-[3.4rem] md:text-[4.6rem] leading-[1.1] text-white mb-6">
           Для важных моментов жизни
         </h1>
 

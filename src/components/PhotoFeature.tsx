@@ -36,7 +36,7 @@ export default function PhotoFeature({
         <p className="text-mama-pink text-[11px] font-semibold uppercase tracking-[0.25em] mb-3">
           {eyebrow}
         </p>
-        <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] mb-4 max-w-2xl">
+        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-[1.15] mb-4 max-w-xl">
           {title}
         </h2>
         {subtitle && (

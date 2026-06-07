@@ -23,14 +23,16 @@ const VALUES = [
 export default function About() {
   const { ref: textRef, isVisible: textVisible } = useInView()
   const { ref: imageRef, isVisible: imageVisible } = useInView()
+  const { ref: photoRef, isVisible: photoVisible } = useInView()
+  const { ref: text2Ref, isVisible: text2Visible } = useInView()
   const { ref: statsRef, isVisible: statsVisible } = useInView()
 
   return (
     <section id="about" className="py-14 md:py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
 
-        {/* Top row: text + image */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-20">
+        {/* Part 1: heading + intro text + portrait image */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-14 md:mb-16">
 
           {/* Text */}
           <div
@@ -62,28 +64,6 @@ export default function About() {
                 к созданию десертов. Каждое изделие, созданное в нашем цеху, проходит через
                 технологический контроль, а каждое решение принимается с мыслью о том, чтобы
                 результат полностью соответствовал ожиданиям клиента.
-              </p>
-              <p>
-                Наши десерты на витрине помогают радовать себя без особого повода. Свежая выпечка
-                создаёт ощущение тепла и заботы. Чашка кофе становится маленьким ежедневным ритуалом,
-                который помогает замедлиться среди суеты.
-              </p>
-              <p>
-                Наши заказные торты становятся частью значимых событий и воспоминаний. За каждым
-                заказом стоит история: день рождения ребёнка, семейный праздник, свадьба, годовщина,
-                встреча с близкими, долгожданное признание — именно из таких моментов формируются
-                воспоминания, которые остаются с нами на долгие годы. Мы понимаем, что за каждым
-                заказом стоят ожидания, волнение и желание сделать особенный день по-настоящему
-                красивым и счастливым. Именно поэтому мы уделяем внимание каждой детали — от выбора
-                ингредиентов и разработки начинки до декора и финальной подачи.
-              </p>
-              <p>
-                Десерт для нас — это гораздо больше, чем просто сладость. Он становится частью
-                истории. Частью эмоций. Частью события, которое хочется запомнить.
-              </p>
-              <p>
-                Мы создаём десерты для важных моментов жизни — больших и маленьких.
-                Потому что именно из них складывается счастье.
               </p>
             </div>
 
@@ -126,6 +106,56 @@ export default function About() {
           </div>
         </div>
 
+        {/* Horizontal photo break */}
+        <div
+          ref={photoRef}
+          className={`relative h-[280px] md:h-[360px] rounded-3xl overflow-hidden shadow-xl shadow-mama-navy/10 mb-14 md:mb-16 transition-all duration-700 ${
+            photoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=1600&q=85&fit=crop"
+            alt="Цех кондитерской Мама десертов"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+
+        {/* Part 2: continuation text */}
+        <div
+          ref={text2Ref}
+          className={`max-w-3xl mx-auto mb-20 transition-all duration-700 ${
+            text2Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-5 text-mama-navy/65 leading-relaxed text-base">
+            <p>
+              Наши десерты на витрине помогают радовать себя без особого повода. Свежая выпечка
+              создаёт ощущение тепла и заботы. Чашка кофе становится маленьким ежедневным ритуалом,
+              который помогает замедлиться среди суеты.
+            </p>
+            <p>
+              Наши заказные торты становятся частью значимых событий и воспоминаний. За каждым
+              заказом стоит история: день рождения ребёнка, семейный праздник, свадьба, годовщина,
+              встреча с близкими, долгожданное признание — именно из таких моментов формируются
+              воспоминания, которые остаются с нами на долгие годы.
+            </p>
+            <p>
+              Мы понимаем, что за каждым заказом стоят ожидания, волнение и желание сделать
+              особенный день по-настоящему красивым и счастливым. Именно поэтому мы уделяем
+              внимание каждой детали — от выбора ингредиентов и разработки начинки до декора
+              и финальной подачи.
+            </p>
+            <p>
+              Десерт для нас — это гораздо больше, чем просто сладость. Он становится частью
+              истории, частью эмоций, частью события, которое хочется запомнить. Мы создаём
+              десерты для важных моментов жизни — больших и маленьких. Потому что именно из них
+              складывается счастье.
+            </p>
+          </div>
+        </div>
+
         {/* Stats row */}
         <div
           ref={statsRef}
@@ -139,7 +169,7 @@ export default function About() {
               className="text-center"
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <p className="font-display font-bold text-5xl md:text-6xl text-mama-navy mb-2 leading-none">
+              <p className="font-display text-5xl md:text-6xl text-mama-navy mb-2 leading-none">
                 {v.number}
               </p>
               <p className="text-mama-pink font-semibold text-[11px] uppercase tracking-[0.2em] mb-2">

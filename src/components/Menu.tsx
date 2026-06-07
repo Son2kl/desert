@@ -96,7 +96,7 @@ function FeaturedDrinkCard({ item }: { item: MenuItem }) {
         )}
       </div>
       <div className="p-6">
-        <h4 className="font-display font-bold text-2xl text-mama-navy mb-2 leading-tight">{item.name}</h4>
+        <h4 className="font-display text-2xl text-mama-navy mb-2 leading-tight">{item.name}</h4>
         <p className="text-mama-navy/55 text-sm font-light leading-relaxed mb-5">{item.description}</p>
         <div className="flex items-center justify-between pt-4 border-t border-mama-blush/60">
           <span className="font-bold text-mama-navy text-xl">{item.price} <span className="text-base font-normal text-mama-navy/40">₽</span></span>
@@ -148,7 +148,7 @@ function ShowcaseCard({ item, placeholderClass }: { item: ShowcaseItem; placehol
           </>
         ) : (
           <div className={`w-full h-full ${placeholderClass} flex items-end p-4`}>
-            <span className="font-display font-bold text-4xl leading-none select-none text-white/10">
+            <span className="font-display text-4xl leading-none select-none text-white/10">
               {item.name.charAt(0)}
             </span>
           </div>
