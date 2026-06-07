@@ -1,7 +1,7 @@
 const NAV_LINKS = [
   { href: '#about',    label: 'О нас' },
   { href: '#menu',     label: 'Меню' },
-  { href: '#cakes',    label: 'Торты' },
+  { href: '#cakes',    label: 'Торты на заказ' },
 
   { href: '#contacts', label: 'Контакты' },
 ]

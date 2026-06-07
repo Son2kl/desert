@@ -513,7 +513,7 @@ export default function Cakes() {
           }`}
         >
           <span className="section-tag">На заказ</span>
-          <h2 className="section-title mb-5">Торты</h2>
+          <h2 className="section-title mb-5">Торты на заказ</h2>
           <p className="section-subtitle mx-auto text-center">
             Авторские торты с индивидуальным декором. Выберите вкус и оформление — свяжемся в течение 2 часов
           </p>

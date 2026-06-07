@@ -20,14 +20,17 @@ export default function Hero() {
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
 
-        <p className="text-mama-pink/90 text-[11px] font-semibold tracking-[0.3em] uppercase mb-6">
-          кондитерская · Краснодар
+        <p className="font-display text-white/85 text-sm md:text-base tracking-[0.25em] uppercase mb-5">
+          Мама десертов
         </p>
 
-        <h1 className="font-display font-bold text-[2.8rem] sm:text-[4rem] md:text-[5.5rem] leading-[0.95] text-white mb-8">
-          Мама<br />
-          <span className="italic">десертов</span>
+        <h1 className="font-display font-bold text-[2.3rem] sm:text-[3.4rem] md:text-[4.6rem] leading-[1.1] text-white mb-6">
+          Для важных моментов жизни
         </h1>
+
+        <p className="text-white/70 text-sm md:text-base font-light max-w-xl mx-auto mb-9 leading-relaxed">
+          От праздничных событий до повседневных радостей — создаём десерты, которые дарят уверенность в важные дни и делают счастливее обычные.
+        </p>
 
         <a href="#menu" className="btn-primary text-sm px-10 py-4">
           Смотреть меню

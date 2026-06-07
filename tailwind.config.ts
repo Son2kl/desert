@@ -17,7 +17,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-playfair)', 'Georgia', 'serif'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
         sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
       },
       animation: {
